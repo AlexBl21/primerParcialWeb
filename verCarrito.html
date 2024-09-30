@@ -1,53 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Pedido</title>
+    <title>Detalle del Carrito</title>
     <link rel="stylesheet" href="verCarrito.css">
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <h1>Detalles del Pedido</h1>
-            </div>
-            <div class="user-info">
-                <span>Bienvenido: John Doe</span>
-                <div class="icon-container">
-                    <button id="volver-tienda">Seguir Comprando</button>
-                    <button id="btn-logout">Salir</button>
-                </div>
-            </div>
-        </div>
+        <button class="footer-btn" id="btn-carrito">Carrito</button>
+        <button class="footer-btn" id="btn-logout">Salir</button>
     </header>
 
     <main>
-        <section class="pedido-detalles">
-            <h2>Relación de Productos</h2>
-            <table id="tabla-productos">
-                <thead>
-                    <tr>
-                        <th>Concepto</th>
-                        <th>Cantidad</th>
-                        <th>Valor</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Aquí se cargarán los productos del pedido -->
-                </tbody>
-            </table>
-            <div class="total-container">
-                <h3>Total: $<span id="total-precio">0</span></h3>
-            </div>
-            <div class="acciones">
-                <button id="actualizar-carrito">Actualizar</button>
-                <button id="confirmar-carrito">Confirmar</button>
-            </div>
-        </section>
+        <h2>Productos en el Carrito</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody id="detalle-carrito">
+            </tbody>
+        </table>
     </main>
 
-    <script src="verCarrito.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>

@@ -9,19 +9,35 @@ body {
     background-color: #f8f8f8;
 }
 
-.header-container {
+header {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
-    padding: 10px 30px;
-    background-color: white;
-    border-bottom: 1px solid #ddd;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #007bff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    gap: 20px;
 }
 
-.logo {
-    font-size: 18px;
+.header-btn {
+    background-color: #fff;
+    color: #007bff;
+    border: 2px solid #007bff;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.header-btn:hover {
+    background-color: #0056b3;
+    color: white;
+}
 .user-info {
     display: flex;
     align-items: center;

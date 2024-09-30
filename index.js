@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Validación de credenciales para el formulario de login
     var loginForm = document.getElementById("loginForm");
     if (loginForm) {
         loginForm.addEventListener("submit", function (event) {
@@ -7,24 +6,21 @@ document.addEventListener("DOMContentLoaded", function () {
             var username = document.getElementById("username").value;
             var password = document.getElementById("password").value;
 
-            // Validación con credenciales fijas
             if (username === "mor_2314" && password === "83r5^_") {
                 window.location.href = "tienda.html";
             } else {
-                alert("Usuario o contraseña invalida");
+                alert("Usuario o contraseña inválida");
             }
         });
     }
 
-    // Simulación de usuario logueado (ID 2)
-    const userId = 2;
-    let carritoId = null; // Variable para almacenar el ID del carrito actual
+    const userId = 2; 
+    let carritoId = null; 
 
-    // Cargar productos por categoría (para tienda.html)
     const botonesCategorias = document.querySelectorAll(".categoria-btn");
     const productosContainer = document.querySelector(".productos-container");
 
-    // Función para cargar productos según la categoría
+
     function cargarProductosPorCategoria(categoria) {
         const apiUrl = `https://fakestoreapi.com/products/category/${categoria}`;
 
@@ -48,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     productosContainer.appendChild(card);
                 });
 
-                // Asignar evento a los botones de agregar al carrito
+           
                 const addToCartButtons = document.querySelectorAll(".agregar-carrito-btn");
                 addToCartButtons.forEach((button) => {
                     button.addEventListener("click", function () {
@@ -63,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // Cargar carritos de usuario existente o crear uno nuevo
+  
     function obtenerCarritoDeUsuario() {
         const apiUrl = `https://fakestoreapi.com/carts/user/${userId}`;
 
@@ -71,12 +67,10 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((response) => response.json())
             .then((carritos) => {
                 if (carritos.length > 0) {
-                    // Si el usuario tiene carritos previos, usar el más reciente
                     const ultimoCarrito = carritos[carritos.length - 1];
                     carritoId = ultimoCarrito.id;
                     return ultimoCarrito;
                 } else {
-                    // Si no tiene carritos, crear uno nuevo
                     return crearNuevoCarrito();
                 }
             })
@@ -85,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // Crear nuevo carrito
+
     function crearNuevoCarrito() {
         const carritoData = {
             userId: userId,
@@ -110,38 +104,31 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // Agregar productos al carrito existente
+    // Función para agregar producto al carrito
     function agregarProductoAlCarrito(productId) {
         if (!carritoId) {
-            // Si no tenemos un carritoId, obtenemos o creamos uno
             obtenerCarritoDeUsuario().then(() => {
-                // Luego de obtener o crear el carrito, agregamos el producto
                 actualizarCarrito(productId);
             });
         } else {
-            // Si ya tenemos un carritoId, simplemente agregamos el producto
             actualizarCarrito(productId);
         }
     }
 
-    // Función para actualizar el carrito con un nuevo producto
+    // Función para actualizar el carrito con el producto seleccionado
     function actualizarCarrito(productId) {
-        // Obtener los detalles del carrito actual
         fetch(`https://fakestoreapi.com/carts/${carritoId}`)
             .then((response) => response.json())
             .then((carrito) => {
-                // Verificar si el producto ya existe en el carrito
                 const productoExistente = carrito.products.find(p => p.productId == productId);
 
                 if (productoExistente) {
-                    // Si el producto ya existe, aumentar su cantidad
-                    productoExistente.quantity += 1;
+                    productoExistente.quantity += 1; // Incrementar la cantidad si ya existe en el carrito
                 } else {
-                    // Si no existe, agregarlo al carrito
-                    carrito.products.push({ productId: productId, quantity: 1 });
+                    carrito.products.push({ productId: productId, quantity: 1 }); // Si no existe, lo agregamos
                 }
 
-                // Actualizar carrito en la API
+                // Actualizamos el carrito en la API
                 return fetch(`https://fakestoreapi.com/carts/${carritoId}`, {
                     method: "PUT",
                     body: JSON.stringify(carrito),
@@ -161,14 +148,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Inicializar la tienda cargando productos por categoría
-    if (botonesCategorias) {
-        botonesCategorias.forEach((boton) => {
-            boton.addEventListener("click", function () {
-                const categoria = this.dataset.category;
-                cargarProductosPorCategoria(categoria);
-            });
+    botonesCategorias.forEach((boton) => {
+        boton.addEventListener("click", function () {
+            const categoria = this.dataset.category;
+            cargarProductosPorCategoria(categoria);
         });
-    }
+    });
 
     // Manejar navegación al carrito y logout
     const btnCarrito = document.getElementById("btn-carrito");
@@ -180,4 +165,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const btnLogout = document.getElementById("btn-logout");
     if (btnLogout) {
-        btn
+        btnLogout.addEventListener("click", function () {
+            window.location.href = "index.html";
+        });
+    }
+});

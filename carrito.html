@@ -1,46 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito de Compras</title>
+    <title>Carrito de compras</title>
     <link rel="stylesheet" href="carrito.css">
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <div class="logo">
-                <h1>Shop Online</h1>
-                <p>Anytime, Anywhere</p>
-            </div>
-            <div class="user-info">
-                <span>Bienvenido: Jhon Doe</span>
-                <div class="icon-container">
-                    <div class="icon" id="cart-icon">
-                        <img src="carrito.png" alt="Carrito" />
-                        <p>Carrito</p>
-                    </div>
-                    <div class="icon" id="logout-icon">
-                        <img src="logout.png" alt="Salir" />
-                        <p>Salir</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <button class="footer-btn" id="btn-carrito">Carrito</button>
+        <button class="footer-btn" id="btn-logout">Salir</button>
     </header>
 
     <main>
-        <h2>Relación de Pedidos</h2>
+        <h2>Lista de Carritos</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Numero</th>
-                    <th>Fecha Solicitud</th>
+                    <th>#</th>
+                    <th>Fecha</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="cart-list">
-                <!-- Carritos se cargarán aquí -->
             </tbody>
         </table>
     </main>
