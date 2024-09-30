@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2? family= Borel & family= Cabin & family= Baile+Guión & family= Lumanosimo & family= Roboto:wght@100 & family= Sedgwick+ Ave+Pantalla & family= Ubuntu:wght@300 & display=swap');
+
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/*cuerpo*/
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-image: url("img/bg-poker.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 6rem;
+    padding: 3rem 3rem;
+    border-radius: 15px;
+    gap: 20px;
+    min-width: 150px;
+    background-color: #fffcfc9e;
+    backdrop-filter: blur(0.5px) ;  /*esto da un desenfoque al fondo o lo que hay detras*/
+    box-shadow: -8px -8px 15px rgb(89, 115, 88);
+}
+
+/*seccion de cuentas*/
+.accounts{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    
+}
+
+.accounts-btn{
+    background-color: #fcfcfc;
+    border-color: #b5afaf;
+    border-style:solid;
+    width: 5.5rem;
+    height: 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 2px 2px;
+}
+
+.accounts-btn:hover {
+    background-color: #ddd;
+    border-width: 3px;
+    border-color: rgb(112, 195, 195);
+}
+
+.accounts-btn picture {
+    margin:auto;
+    width: 25px;
+    height: 25px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accounts-btn picture img {
+    width: 90%;
+}
+
+
+/*seccion separador*/
+
+.separator {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    
+}
+
+.separator hr{
+    flex-grow: 2 ;
+    border: none;
+    border-bottom: 3px solid #ababab;
+    border-radius: 2px;
+}
+
+.separator span{
+    color:#7f7f7f;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label span {
+    font-weight: 600;
+    font-size: 15px;
+    display: block;
+}
+
+label input {
+    width: auto;
+    background-color: #f3f3f4;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14pt;
+    transition: background-color 0.2s, border 0.2s, box-shadow 0.2s;
+}
+
+label input:hover{
+    background-color: white;
+    border: solid 1px #4e7b52;
+    box-shadow: 0 0 4px rgb(112, 195, 195);
+}
+
+label input:focus{
+    background-color: white;
+    border: solid 1px #249242;
+    box-shadow: 0 0 4px rgb(112, 195, 195);
+}
+
+.checkbox-label {
+    display: flex;
+    flex-direction: row;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 40px;
+}
+
+
+.checkbox-label span {
+    font-weight: 400;
+    font-size: small;
+}
+
+.btn-submit {
+    background-color: #0d5fbd;
+    color: white;
+    font-weight: 500;
+    font-size: 14pt;
+    text-align: center;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    opacity: 0.75;
+}
