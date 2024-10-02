@@ -14,16 +14,28 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const userId = 2; 
-    let carritoId = null; 
+    const btnCarrito = document.getElementById("btn-carrito");
+    const btnLogout = document.getElementById("btn-logout");
 
+    if (btnCarrito) {
+        btnCarrito.addEventListener("click", function () {
+            window.location.href = "carrito.html"; 
+        });
+    }
+
+    if (btnLogout) {
+        btnLogout.addEventListener("click", function () {
+            window.location.href = "index.html";
+        });
+    }
+
+    // cargar los productos
     const botonesCategorias = document.querySelectorAll(".categoria-btn");
     const productosContainer = document.querySelector(".productos-container");
 
-
     function cargarProductosPorCategoria(categoria) {
         const apiUrl = `https://fakestoreapi.com/products/category/${categoria}`;
-
+        
         productosContainer.innerHTML = "<p>Cargando productos...</p>";
 
         fetch(apiUrl)
@@ -44,12 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     productosContainer.appendChild(card);
                 });
 
-           
+                // Botones add del carrito
                 const addToCartButtons = document.querySelectorAll(".agregar-carrito-btn");
                 addToCartButtons.forEach((button) => {
                     button.addEventListener("click", function () {
-                        const productId = this.dataset.productId;
-                        agregarProductoAlCarrito(productId);
+                        alert("Producto agregado al carrito");
                     });
                 });
             })
@@ -59,95 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-  
-    function obtenerCarritoDeUsuario() {
-        const apiUrl = `https://fakestoreapi.com/carts/user/${userId}`;
-
-        return fetch(apiUrl)
-            .then((response) => response.json())
-            .then((carritos) => {
-                if (carritos.length > 0) {
-                    const ultimoCarrito = carritos[carritos.length - 1];
-                    carritoId = ultimoCarrito.id;
-                    return ultimoCarrito;
-                } else {
-                    return crearNuevoCarrito();
-                }
-            })
-            .catch((error) => {
-                console.error("Error al cargar carritos del usuario:", error);
-            });
-    }
-
-
-    function crearNuevoCarrito() {
-        const carritoData = {
-            userId: userId,
-            date: new Date().toISOString(),
-            products: []
-        };
-
-        return fetch("https://fakestoreapi.com/carts", {
-            method: "POST",
-            body: JSON.stringify(carritoData),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then((response) => response.json())
-            .then((nuevoCarrito) => {
-                carritoId = nuevoCarrito.id;
-                return nuevoCarrito;
-            })
-            .catch((error) => {
-                console.error("Error al crear nuevo carrito:", error);
-            });
-    }
-
-    // Función para agregar producto al carrito
-    function agregarProductoAlCarrito(productId) {
-        if (!carritoId) {
-            obtenerCarritoDeUsuario().then(() => {
-                actualizarCarrito(productId);
-            });
-        } else {
-            actualizarCarrito(productId);
-        }
-    }
-
-    // Función para actualizar el carrito con el producto seleccionado
-    function actualizarCarrito(productId) {
-        fetch(`https://fakestoreapi.com/carts/${carritoId}`)
-            .then((response) => response.json())
-            .then((carrito) => {
-                const productoExistente = carrito.products.find(p => p.productId == productId);
-
-                if (productoExistente) {
-                    productoExistente.quantity += 1; // Incrementar la cantidad si ya existe en el carrito
-                } else {
-                    carrito.products.push({ productId: productId, quantity: 1 }); // Si no existe, lo agregamos
-                }
-
-                // Actualizamos el carrito en la API
-                return fetch(`https://fakestoreapi.com/carts/${carritoId}`, {
-                    method: "PUT",
-                    body: JSON.stringify(carrito),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                });
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Producto agregado al carrito.");
-                console.log("Carrito actualizado:", data);
-            })
-            .catch((error) => {
-                console.error("Error al actualizar el carrito:", error);
-            });
-    }
-
-    // Inicializar la tienda cargando productos por categoría
+    // carga de las categorias
     botonesCategorias.forEach((boton) => {
         boton.addEventListener("click", function () {
             const categoria = this.dataset.category;
@@ -155,18 +78,94 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Manejar navegación al carrito y logout
-    const btnCarrito = document.getElementById("btn-carrito");
-    if (btnCarrito) {
-        btnCarrito.addEventListener("click", function () {
-            window.location.href = "carrito.html";
-        });
+    // carga de los carritos
+    const cartList = document.getElementById("cart-list");
+
+    if (cartList) {
+        const apiUrlCarritos = `https://fakestoreapi.com/carts/user/1`;
+
+        fetch(apiUrlCarritos)
+            .then((response) => response.json())
+            .then((carritos) => {
+                carritos.forEach((carrito, index) => {
+                    const fecha = new Date(carrito.date).toLocaleDateString();
+                    const row = `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${fecha}</td>
+                            <td><a href="verCarrito.html?cartId=${carrito.id}">Ver</a></td>
+                        </tr>
+                    `;
+                    cartList.innerHTML += row;
+                });
+            })
+            .catch((error) => {
+                console.error("Error al cargar los carritos:", error);
+            });
     }
 
-    const btnLogout = document.getElementById("btn-logout");
-    if (btnLogout) {
-        btnLogout.addEventListener("click", function () {
-            window.location.href = "index.html";
-        });
+    // ver carrito
+    const urlParams = new URLSearchParams(window.location.search);
+    const cartId = urlParams.get("cartId");
+
+    if (cartId) {
+        const detalleCarrito = document.getElementById("detalle-carrito");
+        const totalPagarElement = document.getElementById("total-pagar");
+        let totalPagar = 0;
+        const btnActualizar= this.getElementById("btn-actualizar");
+        const btnConfirmar= this.getElementById("btn-confirmar");
+        const btnSeguirComprando= this.getElementById("btn-seguir");
+        
+        if (btnActualizar) {
+
+            btnActualizar.addEventListener("click", function() {
+                window.location.href="carrito.html";
+            });
+        }
+
+        if(btnConfirmar){
+            btnConfirmar.addEventListener("click", function(){
+                alert("pedido confirmado");
+            })
+        }
+
+        if(btnSeguirComprando){
+            btnSeguirComprando.addEventListener("click", function(){
+                window.location.href="tienda.html";
+            })
+        }
+
+
+        fetch(`https://fakestoreapi.com/carts/${cartId}`)
+            .then((response) => response.json())
+            .then((cartDetails) => {
+                const products = cartDetails.products;
+
+                products.forEach((producto) => {
+                    // obtener detalles
+                    fetch(`https://fakestoreapi.com/products/${producto.productId}`)
+                        .then((response) => response.json())
+                        .then((productDetails) => {
+                            const subtotal = (producto.quantity * productDetails.price).toFixed(2);
+                            totalPagar += parseFloat(subtotal); // aca el total
+
+                            const row = `
+                                <tr>
+                                    <td>${productDetails.title}</td>
+                                    <td>${producto.quantity}</td>
+                                    <td>$${productDetails.price.toFixed(2)}</td>
+                                    <td>$${subtotal}</td>
+                                </tr>
+                            `;
+                            detalleCarrito.innerHTML += row;
+
+                            // actualiza total
+                            totalPagarElement.textContent = totalPagar.toFixed(2);
+                        });
+                });
+            })
+            .catch((error) => {
+                console.error("Error al obtener los detalles del carrito:", error);
+            });
     }
 });

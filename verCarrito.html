@@ -8,8 +8,23 @@
 </head>
 <body>
     <header>
-        <button class="footer-btn" id="btn-carrito">Carrito</button>
-        <button class="footer-btn" id="btn-logout">Salir</button>
+        <div class="header-logo">
+            <h1>Shop Online</h1>
+            <p>Anytime, Anywhere</p>
+        </div>
+        <div class="user-info">
+            <span><strong>Bienvenido:</strong> Jhon Doe</span>
+        </div>
+        <div class="icon-container" id="btn-carrito">
+            <div class="icon">
+                <img src="https://images.vexels.com/content/200097/preview/shopping-cart-icon-shopping-cart-2f1cbe.png" alt="Carrito">
+                <span>Carrito</span>
+            </div>
+            <div class="icon" id="btn-logout">
+                <img src="https://cdn-icons-png.flaticon.com/512/3580/3580154.png" alt="Salir">
+                <span>Salir</span>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -24,8 +39,18 @@
                 </tr>
             </thead>
             <tbody id="detalle-carrito">
+             
             </tbody>
         </table>
+        <div class="total-container">
+            <h3>Total a pagar: $<span id="total-pagar">0.00</span></h3>
+        </div>
+
+        <div class="acciones">
+            <button id="btn-actualizar">Actualizar</button>
+            <button id="btn-confirmar">Confirmar</button>
+            <button id="btn-seguir">Seguir Comprando</button>
+        </div>
     </main>
 
     <script src="index.js"></script>

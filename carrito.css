@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -11,46 +12,41 @@ body {
 
 header {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 20px 0;
-    background-color: #007bff;
+    padding: 20px 50px;
+    background-color:#007bff;
+    color: #fff;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    gap: 20px;
+    border-bottom: 2px solid #ddd;
 }
 
-.header-btn {
-    background-color: #fff;
-    color: #007bff;
-    border: 2px solid #007bff;
-    padding: 10px 20px;
+.header-logo h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-logo p {
+    margin: 0;
     font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.header-btn:hover {
-    background-color: #0056b3;
-    color: white;
-}
 .user-info {
     display: flex;
     align-items: center;
 }
 
 .user-info span {
-    margin-right: 20px;
     font-size: 16px;
 }
 
 .icon-container {
     display: flex;
-    gap: 15px;
+    gap: 20px;
 }
 
 .icon {
@@ -65,8 +61,13 @@ header {
     height: 25px;
 }
 
+.icon span {
+    font-size: 14px;
+    color: #ffffff;
+}
+
 main {
-    padding: 30px;
+    padding: 120px 30px 30px 30px;
 }
 
 h2 {
@@ -74,6 +75,7 @@ h2 {
     color: #007bff;
     margin-bottom: 20px;
 }
+
 
 table {
     width: 100%;

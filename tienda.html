@@ -8,18 +8,35 @@
 </head>
 <body>
     <header>
-        <button class="footer-btn" id="btn-carrito">Carrito</button>
-        <button class="footer-btn" id="btn-logout">Salir</button>
+        <div class="header-logo">
+            <h1>Shop Online</h1>
+            <p>Anytime, Anywhere</p>
+        </div>
+        <div class="header-search">
+            <input type="text" placeholder="Filtro de búsqueda..." class="search-input">
+            <button class="search-btn">Buscar</button>
+        </div>
+        <div class="icon-container">
+            <div class="icon" id="btn-carrito">
+                <img src="https://images.vexels.com/content/200097/preview/shopping-cart-icon-shopping-cart-2f1cbe.png" alt="Carrito">
+                <span>Carrito</span>
+            </div>
+            <div class="icon" id="btn-logout">
+                <img src="https://cdn-icons-png.flaticon.com/512/3580/3580154.png" alt="Salir">
+                <span>Salir</span>
+            </div>
+        </div>
     </header>
+
     <div class="container">
         <div class="botones">
-
             <button class="categoria-btn" data-category="electronics">Electronics</button>
             <button class="categoria-btn" data-category="jewelery">Jewelery</button>
             <button class="categoria-btn" data-category="men's clothing">Men's Clothing</button>
             <button class="categoria-btn" data-category="women's clothing">Women's Clothing</button>
         </div>
-        <div class="productos-container">
+        <div class="productos-container" id="productos-container">
+
         </div>
     </div>
 

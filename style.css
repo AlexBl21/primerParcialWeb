@@ -14,9 +14,6 @@ body{
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-image: url("img/bg-poker.png");
-    background-repeat: no-repeat;
-    background-size: cover;
     
 }
 .container{
@@ -32,45 +29,6 @@ body{
     box-shadow: -8px -8px 15px rgb(89, 115, 88);
 }
 
-/*seccion de cuentas*/
-.accounts{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0;
-    
-}
-
-.accounts-btn{
-    background-color: #fcfcfc;
-    border-color: #b5afaf;
-    border-style:solid;
-    width: 5.5rem;
-    height: 45px;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 2px 2px;
-}
-
-.accounts-btn:hover {
-    background-color: #ddd;
-    border-width: 3px;
-    border-color: rgb(112, 195, 195);
-}
-
-.accounts-btn picture {
-    margin:auto;
-    width: 25px;
-    height: 25px;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.accounts-btn picture img {
-    width: 90%;
-}
 
 
 /*seccion separador*/
